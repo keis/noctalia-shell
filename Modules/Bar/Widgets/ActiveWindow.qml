@@ -63,6 +63,7 @@ Item {
   function getAppIcon() {
     try {
       // Try CompositorService first
+      /*
       const focusedWindow = CompositorService.getFocusedWindow()
       if (focusedWindow && focusedWindow.appId) {
         try {
@@ -76,8 +77,9 @@ Item {
           Logger.warn("ActiveWindow", "Error getting icon from CompositorService:", iconError)
         }
       }
+      */
 
-      if (CompositorService.isHyprland) {
+      if (CompositorService.isHyprland || CompositorService.isI3) {
         // Fallback to ToplevelManager
         if (ToplevelManager && ToplevelManager.activeToplevel) {
           try {

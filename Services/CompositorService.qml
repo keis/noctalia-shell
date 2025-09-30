@@ -11,6 +11,7 @@ Singleton {
   // Compositor detection
   property bool isHyprland: false
   property bool isNiri: false
+  property bool isI3: false
 
   // Generic workspace and window data
   property ListModel workspaces: ListModel {}
@@ -31,14 +32,22 @@ Singleton {
 
   function detectCompositor() {
     const hyprlandSignature = Quickshell.env("HYPRLAND_INSTANCE_SIGNATURE")
+    const i3Sock = Quickshell.env("I3SOCK")
     if (hyprlandSignature && hyprlandSignature.length > 0) {
       isHyprland = true
       isNiri = false
+      isI3 = false
       backendLoader.sourceComponent = hyprlandComponent
+    } else if (i3Sock && i3Sock.length > 0) {
+      isHyprland = false
+      isNiri = false
+      isI3 = true
+      backendLoader.sourceComponent = i3Component
     } else {
       // Default to Niri
       isHyprland = false
       isNiri = true
+      isI3 = false
       backendLoader.sourceComponent = niriComponent
     }
   }
@@ -59,6 +68,14 @@ Singleton {
     id: hyprlandComponent
     HyprlandService {
       id: hyprlandBackend
+    }
+}
+
+  // I3 backend component
+  Component {
+    id: i3Component
+    I3Service {
+      id: i3Backend
     }
   }
 
