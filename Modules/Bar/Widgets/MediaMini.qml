@@ -40,7 +40,7 @@ Item {
   readonly property string scrollingMode: (widgetSettings.scrollingMode !== undefined) ? widgetSettings.scrollingMode : widgetMetadata.scrollingMode
 
   // Fixed width - no expansion
-  readonly property real widgetWidth: Math.max(1, screen.width * 0.06)
+  readonly property real widgetWidth: Math.max(1, screen.width * 0.12)
 
   readonly property string tooltipText: {
     var title = getTitle()

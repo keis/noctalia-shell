@@ -43,7 +43,7 @@ Item {
   readonly property string scrollingMode: (widgetSettings.scrollingMode !== undefined) ? widgetSettings.scrollingMode : (widgetMetadata.scrollingMode !== undefined ? widgetMetadata.scrollingMode : "hover")
 
   // Fixed width
-  readonly property real widgetWidth: Math.max(1, screen.width * 0.06)
+  readonly property real widgetWidth: Math.max(1, screen.width * 0.16)
 
   implicitHeight: visible ? ((barPosition === "left" || barPosition === "right") ? calculatedVerticalHeight() : Math.round(Style.barHeight * scaling)) : 0
   implicitWidth: visible ? ((barPosition === "left" || barPosition === "right") ? Math.round(Style.baseWidgetSize * 0.8 * scaling) : (widgetWidth * scaling)) : 0
@@ -63,7 +63,6 @@ Item {
   function getAppIcon() {
     try {
       // Try CompositorService first
-      /*
       const focusedWindow = CompositorService.getFocusedWindow()
       if (focusedWindow && focusedWindow.appId) {
         try {
@@ -77,7 +76,6 @@ Item {
           Logger.warn("ActiveWindow", "Error getting icon from CompositorService:", iconError)
         }
       }
-      */
 
       if (CompositorService.isHyprland || CompositorService.isI3) {
         // Fallback to ToplevelManager
@@ -123,6 +121,7 @@ Item {
     height: (barPosition === "left" || barPosition === "right") ? Math.round(Style.baseWidgetSize * 0.8 * scaling) : Math.round(Style.capsuleHeight * scaling)
     radius: (barPosition === "left" || barPosition === "right") ? width / 2 : Math.round(Style.radiusM * scaling)
     color: Settings.data.bar.showCapsule ? Color.mSurfaceVariant : Color.transparent
+    //color: Color.transparent
 
     Item {
       id: mainContainer

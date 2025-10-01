@@ -68,7 +68,8 @@ Item {
 
   function getWorkspaceWidth(ws) {
     const d = Style.capsuleHeight * root.baseDimensionRatio
-    const factor = ws.isFocused ? 2.2 : 1
+    //const factor = ws.isFocused ? 2.2 : 1
+    const factor = 1
     return d * factor * scaling
   }
 
@@ -119,7 +120,7 @@ Item {
       next = localWorkspaces.count - 1
     const ws = localWorkspaces.get(next)
     if (ws && ws.idx !== undefined)
-      CompositorService.switchToWorkspace(ws.idx)
+      CompositorService.switchToWorkspace(ws.name)
   }
 
   Component.onCompleted: {
@@ -323,7 +324,7 @@ Item {
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             onClicked: {
-              CompositorService.switchToWorkspace(model.idx)
+              CompositorService.switchToWorkspace(model.name)
             }
             hoverEnabled: true
           }
@@ -467,7 +468,7 @@ Item {
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             onClicked: {
-              CompositorService.switchToWorkspace(model.idx)
+              CompositorService.switchToWorkspace(model.name)
             }
             hoverEnabled: true
           }
